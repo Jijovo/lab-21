@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20; MIN_AGE = 1, MAX_AGE = 20, SIZE = 15;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20, MIN_AGE = 1, MAX_AGE = 20, SIZE = 15;
 
 //Goat class
 class Goat {
@@ -19,15 +19,17 @@ class Goat {
     Goat();
     //parameter constructor
     Goat(int a, string n, string c);
+    //print
+    void print(){cout << "Goat Name: " << name << ", Age: " << age << ", Color: " << color << endl;};
 };
 
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        Goat data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(Goat val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
             next = n;
@@ -41,7 +43,7 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void push_back(int value) {
+    void push_back(Goat value) {
         Node* newNode = new Node(value);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
@@ -52,7 +54,7 @@ public:
         }
     }
 
-    void push_front(int value) {
+    void push_front(Goat value) {
         Node* newNode = new Node(value);
         if (!head)  // if there's no head, the list is empty
             head = tail = newNode;
@@ -63,7 +65,7 @@ public:
         }
     }
 
-    void insert_after(int value, int position) {
+    /*void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -116,13 +118,13 @@ public:
         }
 
         delete temp;
-    }
+    }*/
 
     void print() {
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->data << " ";
+            current->data.print();
             current = current->next;
         }
         cout << endl;
@@ -132,7 +134,7 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->data << " ";
+            current->data.print();
             current = current->prev;
         }
         cout << endl;
