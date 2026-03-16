@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20, MIN_AGE = 1, MAX_AGE = 20, SIZE = 15;
+const int MIN_LS = 5, MAX_LS = 20, MIN_AGE = 1, MAX_AGE = 20, SIZE = 15;
 
 //Goat class
 class Goat {
@@ -122,7 +122,10 @@ public:
 
     void print() {
         Node* current = head;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty." << endl;
+            return;
+        };
         while (current) {
             current->data.print();
             current = current->next;
@@ -132,7 +135,10 @@ public:
 
     void print_reverse() {
         Node* current = tail;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty." << endl;
+            return;
+        }
         while (current) {
             current->data.print();
             current = current->prev;
@@ -151,20 +157,21 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
     for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
-    cout << "List forward: ";
+        list.push_back(Goat());
+    cout << "List forward: " << endl;
     list.print();
 
-    cout << "List backward: ";
+    cout << endl << "List backward: " << endl;
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
-    cout << "List forward: ";
+    cout << endl << "List forward: " << endl;
     list.print();
 
     return 0;
